@@ -33,8 +33,12 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; end of doxygen.el Copyright ;;;
 
+;; use as
+;; write your .emacs
+;; (require 'epydoc)
+;; 
+;;
 
-;; this is 
 
 ;; bugs
 ;; epydoc-insert-function-comment can't indent correctly if there are not any statement
@@ -51,15 +55,15 @@
 
 (if (not (boundp 'epydoc-copyright))
     (setq epydoc-copyright
-	       "<define variable epydoc-copyright or type your copyright>"))
+	       ""))
 
 (if (not (boundp 'epydoc-project-name))
     (setq epydoc-project-name
-	       "<define variable epydoc-project-name or type your project name>"))
+	       ""))
 
 (if (not (boundp 'epydoc-author-name))
     (setq epydoc-author-name
-	       "<define variable epydoc-author-name or type author name>"))
+	       ""))
 
 (defun epydoc-insert-comment()
   "Insert a generic epydoc comment block at point, including brief
@@ -89,9 +93,9 @@ and long sections."
 		     " <description>\n"
 		     "\n"  
 		     " @file:   %s\n"
-		     "\n"  
+		     "\n"
 		     " @author: %s\n"
-		     "\n"  
+		     "\n"
 		     " @copyright:    %s\n"
 		     "\n"
 		     "\"\"\"\n")
