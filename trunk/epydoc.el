@@ -213,7 +213,7 @@ and long sections."
 (defun find-arg-list ()
   "Extract various bits of information from a C or C++ function declaration"
   (interactive "*")
-  (let ((return-type (find-return-type)))
+  (let ((return-type (epydoc-find-return-type)))
   (save-excursion
     (if (re-search-forward (concat
                               "\\([a-zA-Z0-9_:]+\\)\\s-*("    ; function name
@@ -226,6 +226,25 @@ and long sections."
                                  (buffer-substring (match-beginning 2)
                                                    (match-end 2)) ",")))
       nil))))
+
+(defun epydoc-find-return-type ()
+  "Extract the return type of a function.
+   If the function is a constructor, it returns void."
+  (interactive "*")
+  (save-excursion
+    (let ((start (point)))
+      (search-forward "(")
+      (let ((bound (point)))
+        (goto-char start)
+        (if (re-search-forward 
+             (concat
+              "\\(virtual \|static \|const \\)*" ; opt. modifiers
+              "\\([a-zA-Z0-9_:*]+\\)\\s-+[a-zA-Z0-9_:*]+\\s-*(") ; return type
+             bound t)
+            (buffer-substring (match-beginning 2)(match-end 2))
+          "void")
+        ))))
+
 
 (provide 'epydoc)
 
